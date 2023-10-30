@@ -1,11 +1,9 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect } from 'react';
 
 import { IData } from '../services/interfaces';
 import PianoRoll from '../services/pianoroll';
 
 const PianoRollDisplay: FC = () => {
-  const [data, setData] = useState<Array<IData>>([]);
-
   useEffect(() => {
     const loadData = async () => {
       try {
@@ -15,7 +13,7 @@ const PianoRollDisplay: FC = () => {
             `PianoRollDisplay data fetch error: ${response.status}`
           );
         }
-        setData(await response.json());
+        generateSVGs(await response.json());
       } catch (error: any) {
         console.log(error.message);
       }
@@ -35,14 +33,15 @@ const PianoRollDisplay: FC = () => {
 
     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     svg.classList.add('piano-roll-svg');
-    svg.setAttribute('width', '80%');
+    svg.setAttribute('width', '100%');
     svg.setAttribute('height', '150');
     cardDiv.appendChild(svg);
 
     return { cardDiv, svg };
   };
 
-  const generateSVGs = () => {
+  const generateSVGs = (data: Array<IData>) => {
+    const pianoRollContainer = document.getElementById('pianoRollContainer');
     data.map((_item, i) => {
       if (i < 20) {
         const start = i * 60;
@@ -51,19 +50,13 @@ const PianoRollDisplay: FC = () => {
 
         const { cardDiv, svg } = preparePianoRollCard(i);
         new PianoRoll(svg, partData);
-
-        const pianoRollContainer =
-          document.getElementById('pianoRollContainer');
         pianoRollContainer?.appendChild(cardDiv);
       }
     });
   };
 
   return (
-    <div className='flex flex-col items-center w-full'>
-      <button className='load-svgs my-3' onClick={generateSVGs}>
-        Load Piano Rolls!
-      </button>
+    <div className='flex flex-col items-center w-full p-10'>
       <div
         id='pianoRollContainer'
         className='w-full flex flex-col items-center gap-2 mb-2'

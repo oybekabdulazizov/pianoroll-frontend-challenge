@@ -7,14 +7,9 @@ body {
 }
 
 @layer components {
-  /* button */
-  .load-svgs {
-    @apply bg-[#944038] border-b-[3px] border-[#381815] rounded-[5px] px-5 py-2 text-slate-100 hover:scale-105 transition-all duration-300;
-  }
-
   /* piano-roll-card div */
   .piano-roll-card {
-    @apply border-[1px] border-[#ccc] w-1/2 p-[10px] box-border flex flex-col items-center;
+    @apply w-full border-[1px] border-[#ccc] p-[10px] box-border rounded-md flex flex-col items-center;
   }
 
   /* piano roll card description div */
