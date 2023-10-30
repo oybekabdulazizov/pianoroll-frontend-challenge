@@ -1,14 +1,16 @@
 import { FC } from 'react';
 import Navbar from './components/Navbar';
+import PianoRollDisplay from './components/PianoRollDisplay';
 
 const App: FC = () => {
   return (
-    <div>
+    <>
       <Navbar />
-      <h1 className='font-semibold text-4xl text-center'>
+      <h1 className='font-semibold text-5xl text-center my-3'>
         Welcome to PianoRoll frontend coding challenge!
       </h1>
-    </div>
+      <PianoRollDisplay />
+    </>
   );
 };
 

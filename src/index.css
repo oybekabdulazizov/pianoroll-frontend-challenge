@@ -5,3 +5,24 @@
 body {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
+
+@layer components {
+  /* button */
+  .load-svgs {
+    @apply bg-[#944038] border-b-[3px] border-[#381815] rounded-[5px] px-5 py-2 text-slate-100 hover:scale-105 transition-all duration-300;
+  }
+
+  /* piano-roll-card div */
+  .piano-roll-card {
+    @apply border-[1px] border-[#ccc] w-1/2 p-[10px] box-border flex flex-col items-center;
+  }
+
+  /* piano roll card description div */
+  .description {
+    @apply mt-3 mb-1 text-[16px] font-light;
+  }
+
+  .piano-roll-svg {
+    @apply border-2 border-[#381815];
+  }
+}
