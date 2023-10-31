@@ -12,3 +12,25 @@ export function generateGradientTable(startColor: IColor, endColor: IColor, step
   }
   return gradientTable;
 }
+
+export function calculatePitches(pitches: Array<number>) {
+  let pitch_min = Math.min(...pitches);
+  let pitch_max = Math.max(...pitches);
+  let pitch_span = pitch_max - pitch_min;
+
+  // If the span is too low, we have to extend it equally on both sides
+  if (pitch_span < 24) {
+    const diff = 24 - pitch_span;
+    const low = Math.ceil(diff / 2);
+    const high = Math.floor(diff / 2);
+    pitch_min -= low;
+    pitch_max += high;
+  }
+
+  // And margin up and down
+  pitch_min -= 3;
+  pitch_max += 3;
+  pitch_span = pitch_max - pitch_min;
+
+  return { pitch_min, pitch_max, pitch_span };
+};

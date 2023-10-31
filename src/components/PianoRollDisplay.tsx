@@ -2,8 +2,7 @@ import { FC, useEffect, useState } from 'react';
 
 import { IData } from '../services/interfaces';
 import PianoRoll from './PianoRoll';
-
-const N_ROLLS = 20;
+import { N_ROLLS } from '../services/constants';
 
 const PianoRollDisplay: FC = () => {
   const [pianoRolls, setPianoRolls] = useState<Array<JSX.Element>>([]);

@@ -1,21 +1,7 @@
 import { FC, Fragment, useEffect, useState } from 'react';
 import { IData } from '../services/interfaces';
-import { generateGradientTable } from '../services/utils';
-
-const BACKGROUND_START_COLOR = { r: 93, g: 181, b: 213 };
-const BACKGROUND_END_COLOR = { r: 21, g: 65, b: 81 };
-const BACKGROUND_COLOR_MAP = generateGradientTable(
-  BACKGROUND_START_COLOR,
-  BACKGROUND_END_COLOR,
-  128
-);
-const NOTE_START_COLOR = { r: 66, g: 66, b: 61 };
-const NOTE_END_COLOR = { r: 28, g: 28, b: 26 };
-const NOTE_COLOR_MAP = generateGradientTable(
-  NOTE_START_COLOR,
-  NOTE_END_COLOR,
-  128
-);
+import { calculatePitches } from '../services/utils';
+import { BACKGROUND_COLOR_MAP, NOTE_COLOR_MAP } from '../services/constants';
 
 interface IPianoRoll {
   sequence: Array<IData>;
@@ -139,7 +125,6 @@ const PianoRoll: FC<IPianoRoll> = ({ sequence }) => {
     <svg
       className='piano-roll-svg'
       width='100%'
-      // height='10%'
       xmlns='http://www.w3.org/2000/svg'
       viewBox='0 0 1 1'
       preserveAspectRatio='none'
@@ -153,24 +138,3 @@ const PianoRoll: FC<IPianoRoll> = ({ sequence }) => {
 
 export default PianoRoll;
 
-const calculatePitches = (pitches: Array<number>) => {
-  let pitch_min = Math.min(...pitches);
-  let pitch_max = Math.max(...pitches);
-  let pitch_span = pitch_max - pitch_min;
-
-  // If the span is too low, we have to extend it equally on both sides
-  if (pitch_span < 24) {
-    const diff = 24 - pitch_span;
-    const low = Math.ceil(diff / 2);
-    const high = Math.floor(diff / 2);
-    pitch_min -= low;
-    pitch_max += high;
-  }
-
-  // And margin up and down
-  pitch_min -= 3;
-  pitch_max += 3;
-  pitch_span = pitch_max - pitch_min;
-
-  return { pitch_min, pitch_max, pitch_span };
-};
