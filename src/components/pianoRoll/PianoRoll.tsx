@@ -1,11 +1,9 @@
 import { FC, Fragment, useEffect, useState } from 'react';
-import { IData } from '../services/interfaces';
-import { calculatePitches } from '../services/utils';
-import { BACKGROUND_COLOR_MAP, NOTE_COLOR_MAP } from '../services/constants';
 
-interface IPianoRoll {
-  sequence: Array<IData>;
-}
+import { IData } from '../../services/interfaces';
+import { calculatePitches } from '../../services/utils';
+import { BACKGROUND_COLOR_MAP, NOTE_COLOR_MAP } from '../../services/constants';
+import { IPianoRoll } from './IPianoRoll';
 
 const PianoRoll: FC<IPianoRoll> = ({ sequence }) => {
   const [seq, setSeq] = useState<Array<IData>>([]);
@@ -108,7 +106,7 @@ const PianoRoll: FC<IPianoRoll> = ({ sequence }) => {
       setSeq(sequence);
       setStart(sequence[0].start);
       setEnd(sequence[sequence.length - 1].end - sequence[0].start);
-      
+
       const pitches = sequence.map((note) => {
         return note.pitch;
       });
@@ -137,4 +135,3 @@ const PianoRoll: FC<IPianoRoll> = ({ sequence }) => {
 };
 
 export default PianoRoll;
-

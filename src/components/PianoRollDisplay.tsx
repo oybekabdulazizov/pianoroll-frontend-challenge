@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 
 import { IData } from '../services/interfaces';
-import PianoRoll from './PianoRoll';
+import PianoRoll from './pianoRoll/PianoRoll';
 import { N_ROLLS } from '../services/constants';
 
 const PianoRollDisplay: FC = () => {
