@@ -3,6 +3,7 @@ import { FC, useEffect, useState } from 'react';
 import { IData } from '../../services/interfaces';
 import PianoRoll from '../pianoRoll/PianoRoll';
 import { N_ROLLS } from '../../services/constants';
+import SelectionOverlay from '../selectionOverlay/SelectionOverlay';
 
 const PianoRollDisplay: FC = () => {
   const [selectedItem, setSelectedItem] = useState<JSX.Element | null>(null);
@@ -75,7 +76,10 @@ const PianoRollDisplay: FC = () => {
           >
             x
           </button>
-          {selectedItem}
+          <div className='h-full relative'>
+            {selectedItem}
+            <SelectionOverlay />
+          </div>
         </div>
       )}
       <div
