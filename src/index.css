@@ -18,6 +18,6 @@ body {
   }
 
   .piano-roll-svg {
-    @apply border-2 border-[#381815];
+    @apply border-2 border-[#381815] h-full;
   }
 }
