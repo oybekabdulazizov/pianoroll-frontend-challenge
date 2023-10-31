@@ -1,8 +1,8 @@
 import { FC, useEffect, useState } from 'react';
 
-import { IData } from '../services/interfaces';
-import PianoRoll from './pianoRoll/PianoRoll';
-import { N_ROLLS } from '../services/constants';
+import { IData } from '../../services/interfaces';
+import PianoRoll from '../pianoRoll/PianoRoll';
+import { N_ROLLS } from '../../services/constants';
 
 const PianoRollDisplay: FC = () => {
   const [selectedItem, setSelectedItem] = useState<JSX.Element | null>(null);

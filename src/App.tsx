@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import Navbar from './components/Navbar';
-import PianoRollDisplay from './components/PianoRollDisplay';
+import Navbar from './components/navbar/Navbar';
+import PianoRollDisplay from './components/pianoRollDisplay/PianoRollDisplay';
 
 const App: FC = () => {
   return (
