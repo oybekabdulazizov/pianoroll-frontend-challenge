@@ -68,7 +68,7 @@ const PianoRollDisplay: FC = () => {
       }`}
     >
       {selectedItem && i !== null && (
-        <div className='relative border-2 border-red-300 rounded-lg h-72 sm:h-[350px] pb-16 px-4 md:h-[10%] lg:col-span-3 md:col-span-2 sm:col-span-1'>
+        <div className='relative border-4 border-red-300 rounded-lg h-72 sm:h-[350px] pb-16 px-4 md:h-[10%] lg:col-span-3 md:col-span-2 sm:col-span-1'>
           <div className='description'>This is a piano roll number {i}</div>
           <button
             className='absolute right-5 top-0 text-red-600 text-2xl font-bold'

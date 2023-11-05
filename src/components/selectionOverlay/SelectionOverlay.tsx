@@ -6,12 +6,16 @@ const SelectionOverlay: FC = () => {
   const [selectionStart, setSelectionStart] = useState<{
     x: number;
     y: number;
-  } | null>(null);
+  }>({
+    x: 0,
+    y: 0,
+  });
   const [selectionEnd, setSelectionEnd] = useState<{
     x: number;
     y: number;
-  } | null>(null);
+  }>({ x: 0, y: 0 });
   const [isSelecting, setIsSelecting] = useState(false);
+  const [showSelection, setShowSelection] = useState(false);
 
   const getClientCoordinates = (e: React.MouseEvent<SVGSVGElement>) => {
     if (svgRef.current) {
@@ -25,6 +29,8 @@ const SelectionOverlay: FC = () => {
   };
 
   const handleMouseDown = (e: React.MouseEvent<SVGSVGElement>) => {
+    setShowSelection(false);
+    setIsSelecting(true);
     const { x, y } = getClientCoordinates(e);
     setSelectionStart({ x, y });
     setSelectionEnd({ x, y });
@@ -42,12 +48,13 @@ const SelectionOverlay: FC = () => {
     const { x, y } = getClientCoordinates(e);
     setSelectionEnd({ x, y });
     setIsSelecting(false);
+    setShowSelection(true);
 
     const selection = {
-      x: Math.min(selectionStart?.x || 0, selectionEnd?.x || 0),
-      y: Math.min(selectionStart?.y || 0, selectionEnd?.y || 0),
-      width: Math.abs((selectionEnd?.x || 0) - (selectionStart?.x || 0)),
-      height: Math.abs((selectionEnd?.y || 0) - (selectionStart?.y || 0)),
+      x: Math.min(selectionStart.x, selectionEnd.x),
+      y: Math.min(selectionStart.y, selectionEnd.y),
+      width: Math.abs(selectionEnd.x - selectionStart.x),
+      height: Math.abs(selectionEnd.y - selectionStart.y),
     };
     console.log('Selection Specs:', selection);
   };
@@ -55,26 +62,26 @@ const SelectionOverlay: FC = () => {
   return (
     <svg
       ref={svgRef}
-      className='piano-roll-svg absolute top-0 z-10'
+      className='absolute top-0 z-50'
       width='100%'
       height='100%'
       xmlns='http://www.w3.org/2000/svg'
       viewBox='0 0 1 1'
       preserveAspectRatio='none'
+      onClick={() => console.log('clicked the overlay')}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
     >
-      {isSelecting && (
+      {showSelection && (
         <rect
-          x={Math.min(selectionStart?.x || 0, selectionEnd?.x || 0)}
-          y={Math.min(selectionStart?.y || 0, selectionEnd?.y || 0)}
-          width={Math.abs((selectionEnd?.x || 0) - (selectionStart?.x || 0))}
-          height={Math.abs((selectionEnd?.y || 0) - (selectionStart?.y || 0))}
-          fill='rgba(30, 170, 201, 0.3)'
-        >
-          wwww
-        </rect>
+          x={Math.min(selectionStart.x, selectionEnd.x)}
+          y={Math.min(selectionStart.y, selectionEnd.y)}
+          width={Math.abs(selectionEnd.x - selectionStart.x)}
+          height={Math.abs(selectionEnd.y - selectionStart.y)}
+          fill='pink'
+          fillOpacity='0.4'
+        ></rect>
       )}
     </svg>
   );
